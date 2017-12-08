@@ -1,0 +1,80 @@
+header {
+	nav {
+		position: relative;
+		width: 100%;
+		padding-top: 15px;
+		display: inline-block;
+		text-align: center;
+		color: $links;
+
+		.sub-menu {
+			width: 100%;
+			display: flex;
+		}
+		
+		.main-menu {
+			display: none;
+		}
+
+		.main-menu,
+		.sub-menu {
+			li {
+				&.active {
+					a {
+						color: $secundary;
+						font-weight: 400;
+					}
+				}
+				&:hover {
+					a {
+						color: $linkshover;
+						font-weight: 400;
+					}
+				}			
+			}
+		}
+	}
+}
+
+@include breakpoint($tablet) {
+	header {
+		margin-left: calc(#{$gutter} * 2);
+		margin-right: calc(#{$gutter} * 2);
+
+		nav {
+			position: static;
+			width: 100%;
+			padding: 0;
+			display: block;
+			text-align: left;
+
+			.main-menu {
+				display: block;
+			}
+
+			.main-menu,
+			.sub-menu {
+				display: inline;
+				float: left;
+				width: auto;
+				border-bottom: none;
+				clear: both;
+
+				li {
+					margin-bottom: 1rem;
+
+					&.active {
+						a {
+							border-bottom: 1px solid $secundary;
+						}
+					}
+				}
+			}
+
+			ul {
+				display: block;
+				margin-bottom: $gutter;
+			}
+		}
+	}
+}

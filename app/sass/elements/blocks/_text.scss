@@ -1,0 +1,12 @@
+.block.text {
+	p {
+		margin-bottom: 20px;
+	}
+	ul {
+		li {
+			&:before {
+				content: "- ";
+			}
+		}
+	}
+}

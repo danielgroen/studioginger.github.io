@@ -1,0 +1,29 @@
+.logo {
+	@include font('title');
+	color: $linkshover;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 2rem;
+	padding: calc(#{$gutter} / 2);
+
+	&:hover {
+		color: $secundary;
+	}
+
+	.ginger {
+		@include font('logo');
+	}
+}
+
+@include breakpoint($tablet) {
+	.logo {
+		text-align: left;
+		line-height: 1.2rem;
+		font-size: 2.1rem;
+		padding-left: 0;
+
+		.ginger {
+			display: block;
+		}
+	}
+}

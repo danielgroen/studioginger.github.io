@@ -1,0 +1,11 @@
+body {
+	margin-top: calc(#{$gutter} / 2);
+	margin-bottom: 20px;
+}
+
+@include breakpoint($tablet) {
+	body {
+		margin-top: $gutter;
+		display: flex;
+	}
+}
