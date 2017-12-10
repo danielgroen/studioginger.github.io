@@ -38,42 +38,51 @@ header {
 
 @include breakpoint($tablet) {
 	header {
-		margin-left: calc(#{$gutter} * 2);
-		margin-right: calc(#{$gutter} * 2);
+		width: 100%;
+		@include max-width;
+		margin-top: 30px;
 
 		nav {
 			position: static;
-			width: 100%;
+			width: auto;
 			padding: 0;
 			display: block;
 			text-align: left;
+			float: right;
 
-			.main-menu {
-				display: block;
+			.main-menu-prefix {
+				display: inline-block;
+				margin-bottom: 0;
+				margin-top: 7px;
 			}
 
-			.main-menu,
+			a {
+				font-size: 1.2rem !important;
+				margin-right: 30px;
+			}
+			
 			.sub-menu {
-				display: inline;
-				float: left;
+				display: inline-block;
 				width: auto;
 				border-bottom: none;
-				clear: both;
+				margin-top: 7px;
 
 				li {
-					margin-bottom: 1rem;
+					display: inline-block;
+					// margin-bottom: 1rem;
 
 					&.active {
 						a {
 							border-bottom: 1px solid $secundary;
 						}
 					}
-				}
-			}
 
-			ul {
-				display: block;
-				margin-bottom: $gutter;
+					&:last-child {
+						a {
+							margin-right: 10px;
+						}
+					}
+				}
 			}
 		}
 	}

@@ -38,9 +38,10 @@ body:after {
   height: 100%;
   max-width: $max-width;
   position: fixed;
-  left: 0;
+  left: 50%;
   top: 0;
   pointer-events: none;
+  transform: translateX(-50%);
   @include sgs-change('debug', true);
   @include background-grid($color: red);
   @include sgs-change('debug', false);

@@ -6,22 +6,22 @@
 	}
 }
 
-@include breakpoint($tablet) {
-	.main-menu {
-		overflow: hidden;
-		height: 100%;
-		padding-left: 0;
-		width: 100%;
-		pointer-events: auto;
-		position: static;
-		padding-top: 0;
+// @include breakpoint($tablet) {
+// 	.main-menu {
+// 		overflow: hidden;
+// 		height: 100%;
+// 		padding-left: 0;
+// 		width: 100%;
+// 		pointer-events: auto;
+// 		position: static;
+// 		padding-top: 0;
 
-		li {
-			padding-left: $padding * 2;
-			&:before {
-				content: '- ';
-				border-bottom: none;
-			}
-		}
-	}
-}
+// 		li {
+// 			padding-left: $padding * 2;
+// 			&:before {
+// 				content: '- ';
+// 				border-bottom: none;
+// 			}
+// 		}
+// 	}
+// }

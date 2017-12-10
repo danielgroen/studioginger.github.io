@@ -1,11 +1,13 @@
 body {
+	margin-left: auto;
+	margin-right: auto;
 	margin-top: calc(#{$gutter} / 2);
 	margin-bottom: 20px;
+	width: 100%;
 }
 
 @include breakpoint($tablet) {
 	body {
-		margin-top: $gutter;
-		display: flex;
+		margin-top: 0;
 	}
 }

@@ -5,14 +5,18 @@ main {
     overflow: hidden;
     margin: 0;
 }
+
 body.fotos {
 	main {
 		overflow: visible;
 	}
 }
+
 @include breakpoint($tablet) {
 	main {
-		width: calc(100% - 65px);
-		margin-right: 15px;
+		width: 100%;
+		margin: 0 auto;
+		margin-top: 50px;
+		// margin-top: 15px;
 	}
 }

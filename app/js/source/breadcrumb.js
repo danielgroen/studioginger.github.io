@@ -10,11 +10,13 @@ if ( $('.main-menu .active').length > 0 ) {
 		$('.breadcrumb .next').addClass('transparent');
 	}
 
-	$('.breadcrumb .previous').attr( 'href', $('.main-menu .active').prev().find('a').text().toLowerCase());
-	$('.breadcrumb .previous .text').text( $('.main-menu .active').prev().find('a').text());
+	if ($('.main-menu .active').prev().find('a').text().toLowerCase().length > 0) {
+		$('.breadcrumb .previous').attr( 'href', $('.main-menu .active').prev().find('a').text().toLowerCase());
+		$('.breadcrumb .previous .text').text( $('.main-menu .active').prev().find('a').text());
+	}
 	
-	$('.breadcrumb .next').attr( 'href', $('.main-menu .active').next().find('a').text().toLowerCase());
-	$('.breadcrumb .next .text').text( $('.main-menu .active').next().find('a').text());
-
-	
+	if ($('.main-menu .active').next().find('a').text().toLowerCase().length > 0) {
+		$('.breadcrumb .next').attr( 'href', $('.main-menu .active').next().find('a').text().toLowerCase());
+		$('.breadcrumb .next .text').text( $('.main-menu .active').next().find('a').text());
+	}
 }

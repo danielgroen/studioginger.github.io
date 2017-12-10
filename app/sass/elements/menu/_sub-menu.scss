@@ -36,6 +36,11 @@
 			&:first-child {
 				display: none;
 			}
+
+			&.active,
+			&:hover {
+				border-bottom: none;
+			}
 		}
 	}
 }
