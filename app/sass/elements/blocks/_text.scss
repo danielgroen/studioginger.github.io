@@ -4,8 +4,13 @@
 	}
 	ul {
 		li {
+			margin-left: 12px;
+			position: relative;
+			
 			&:before {
 				content: "- ";
+				position: absolute;
+				left: -14px;
 			}
 		}
 	}
