@@ -10,7 +10,6 @@ const 			gulp 				= require('gulp'),
 				notify 				= require('gulp-notify'),
 				plumber 			= require('gulp-plumber'),
 				sass 				= require('gulp-sass'),
-				deploy				= require('gulp-gh-pages'),
 				sassGlob 			= require('gulp-sass-glob'),
 				uglify 				= require('gulp-uglify'),
 				cssImageDimensions 	= require("gulp-css-image-dimensions"),
@@ -35,17 +34,13 @@ const 			gulp 				= require('gulp'),
 				cssFiles 			= '/css/*.css',
 				cname				= '/CNAME',
 				
+				// https://www.npmjs.com/package/github-pages
+				// github-pages -r danielgroen/gh-pages -t $GH_TOKEN ./dist
+
 				host = {
 					sitename: "https://studioginger.nl",
 					username: "sven"
 				},
-
-				//https://www.npmjs.com/package/gulp-gh-pages
-				options = {
-					remoteUrl: "https://github.com/danielgroen/studioginger.github.io.git",
-					branch: "master",
-					force: true
-				};
 
 // Setup browsersync.
 gulp.task('browsersync', function() {
@@ -168,5 +163,5 @@ gulp.task('build', ['js', 'css'], function() {
 
 gulp.task('deploy', function() {
 	return gulp.src(["dist/**/*.*", dist + cname])
-		.pipe(deploy([options]));
+		.pipe(deploy.publish('dist'));
 });
