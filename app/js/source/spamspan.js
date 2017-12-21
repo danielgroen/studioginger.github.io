@@ -1,9 +1,11 @@
-emailE = 'gmail.com'
-emailE = ('https://formspree.io/studioginger11' + '@' + emailE);
+// email
 if ($('.contactform').length > 0 ) {
+	emailE = 'gmail.com'
+	emailE = ('https://formspree.io/studioginger11' + '@' + emailE);
 	$('.contactform').attr('action', emailE);
 }
 
+//telephone 
 tel1 = 'tel:';
 tel2 = '06';
 tel3 = '244';
