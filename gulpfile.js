@@ -21,7 +21,7 @@ const 			gulp 				= require('gulp'),
 				styleInject 		= require("gulp-style-inject"),
 				imagemin 			= require('gulp-imagemin'),
 				reload 				= browserSync.reload,
-				ghPages = require('gulp-gh-pages'),
+				ghPages 			= require('gulp-gh-pages'),
 				
 				// files
 				app 				= './app',
@@ -34,10 +34,12 @@ const 			gulp 				= require('gulp'),
 				htmlFiles 			= '/*.html',
 				cssFiles 			= '/css/*.css',
 				cname				= '/CNAME',
-				
-				// https://www.npmjs.com/package/github-pages
-				// github-pages -r danielgroen/gh-pages -t $GH_TOKEN ./dist
 
+				options = {
+					force: true,
+					branch: 'gh-pages'
+				},
+				
 				host = {
 					sitename: "https://studioginger.nl",
 					username: "sven"
@@ -164,5 +166,5 @@ gulp.task('build', ['js', 'css'], function() {
 
 gulp.task('deploy', function() {
   return gulp.src('./dist/**/*')
-    .pipe(ghPages());
+    .pipe(ghPages(options));
 });
