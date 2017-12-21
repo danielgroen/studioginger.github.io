@@ -21,6 +21,7 @@ const 			gulp 				= require('gulp'),
 				styleInject 		= require("gulp-style-inject"),
 				imagemin 			= require('gulp-imagemin'),
 				reload 				= browserSync.reload,
+				ghPages = require('gulp-gh-pages'),
 				
 				// files
 				app 				= './app',
@@ -40,7 +41,7 @@ const 			gulp 				= require('gulp'),
 				host = {
 					sitename: "https://studioginger.nl",
 					username: "sven"
-				},
+				};
 
 // Setup browsersync.
 gulp.task('browsersync', function() {
@@ -129,7 +130,7 @@ gulp.task('build', ['js', 'css'], function() {
 		},		
 	    function (next) {
 			gulp.src(app + htmlFiles)
-				.pipe(styleInject({encapsulated: false}))
+				// .pipe(styleInject({encapsulated: false}))
 			    .pipe(replace('<link rel="stylesheet" type="text/css" href="css/stylesheet.css">', ' '))
 			    .pipe(replace('<style><!-- inject-style src="./dist/css/stylesheet.css" --></style>', ' '))
 			    .pipe(replace('../img/', 'img/'))
@@ -156,12 +157,12 @@ gulp.task('build', ['js', 'css'], function() {
 		.pipe(gulp.dest( dist + '/data/'));
 
 	gulp.src(app + images)
-		.pipe(imagemin([mozjpeg()]))
+		// .pipe(imagemin([mozjpeg()]))
 		.pipe(gulp.dest(dist + '/img/'));
 
 });
 
 gulp.task('deploy', function() {
-	return gulp.src(["dist/**/*.*", dist + cname])
-		.pipe(deploy.publish('dist'));
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
 });

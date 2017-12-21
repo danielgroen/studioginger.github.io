@@ -42,5 +42,8 @@
     "singularitygs": "^1.7.1",
     "stream-series": "^0.1.1",
     "webfontloader": "^1.6.28"
+  },
+  "dependencies": {
+    "gulp-gh-pages": "git+ssh://git@github.com/tekd/gulp-gh-pages.git#update-dependency"
   }
 }
