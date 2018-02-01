@@ -1,9 +1,9 @@
 .thankyou {
-	width: 40vw;
-	height: 40vh;
+	width: 90vw;
+	height: 70vh;
+	top: 15vh;
+	left: 5vw;
 	position: absolute;
-	top: 30vh;
-	left: 30vw;
 	border-radius: $border-radius;
 	background-color: white;
 	z-index: 50;
@@ -19,6 +19,7 @@
 		flex-direction: column;
 		justify-content: center;
 		height: 100%;
+		padding: $padding;
 
 		> * {
 			align-self: center;
@@ -30,7 +31,8 @@
 		}
 
 		.checkmark {
-			width: 80px;
+			width: 60px;
+			flex: 0 0 auto;
 			fill: $secundary;
 		}
 
@@ -48,6 +50,19 @@
 		    display: block;
    			width: 80%;
 			background-color: rgba($secundary, 1);
+		}
+	}
+}
+
+@include breakpoint($desktop) {
+	.thankyou {
+		width: 30vw;
+		height: 40vh;
+		top: 30vh;
+		left: 35vw;
+
+		.inner {
+			padding: $padding*4;
 		}
 	}
 }

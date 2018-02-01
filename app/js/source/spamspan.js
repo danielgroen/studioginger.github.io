@@ -1,7 +1,7 @@
 // email
 if ($('.contactform').length > 0 ) {
 	emailE = 'gmail.com'
-	emailE = ('https://formspree.io/groendaniel' + '@' + emailE);
+	emailE = ('https://formspree.io/studioginger11' + '@' + emailE);
 	$('.contactform').attr('action', emailE);
 }
 
@@ -23,7 +23,7 @@ var $contactForm = $('.contactform');
 $contactForm.submit(function(e) {
 	e.preventDefault();
 	$.ajax({
-		url: '//formspree.io/groendaniel@gmail.com',
+		url: '//formspree.io/studioginger11@gmail.com',
 		method: 'POST',
 		data: $(this).serialize(),
 		dataType: 'json',
