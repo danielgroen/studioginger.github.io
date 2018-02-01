@@ -1,0 +1,34 @@
+.spinner {
+    position: relative;
+    width: 45px;
+    height: 45px;
+    margin: 0 auto;
+  	animation: loading 2s linear infinite;
+  	opacity: .5;
+  	position: absolute;
+  	top: calc(50% - 45px);
+  	left: calc(50% - 45px);
+  	z-index: 50;
+  	display: none;
+
+  	&.visible {
+  		display: block;
+  	}
+
+	.bubble-1,
+	.bubble-2 {
+	    position: absolute;
+	    top: 0;
+	    width: 25px;
+	    height: 25px;
+	    border-radius: 100%;
+	    background-color: #ff6825;
+	    animation: bounce 2s ease-in-out infinite;
+		
+		&:not(.bubble-1){
+		    top: auto;
+		    bottom: 0;
+		    animation-delay: -1.0s;
+		}
+	}
+}

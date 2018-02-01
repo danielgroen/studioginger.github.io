@@ -25,7 +25,8 @@
 		@include font;
 		margin-bottom: $gutter / 2.5;
 	}
-	input[type='submit'] {
+	input[type='submit'],
+	.send {
 		background-color: rgba($secundary, .5);
 		color: $white;
 		font-weight: 800;
