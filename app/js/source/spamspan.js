@@ -10,13 +10,13 @@ if ($('.tel').length > 0 ) {
 	$('.tel').text( tel2 + '-' + tel3 + ' ' + tel4 + ' ' + tel5);
 
 }
-// studioginger11@gmail.com
+
 // form
 var $contactForm = $('.contactform');
 $contactForm.submit(function(e) {
 	e.preventDefault();
 	$.ajax({
-		url: '//formspree.io/groendaniel@gmail.com',
+		url: '//formspree.io/studioginger11@gmail.com',
 		method: 'POST',
 		data: $(this).serialize(),
 		dataType: 'json',
