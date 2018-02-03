@@ -1,10 +1,3 @@
-// email
-if ($('.contactform').length > 0 ) {
-	emailE = 'gmail.com'
-	emailE = ('https://formspree.io/studioginger11' + '@' + emailE);
-	$('.contactform').attr('action', emailE);
-}
-
 //telephone 
 tel1 = 'tel:';
 tel2 = '06';
@@ -17,22 +10,22 @@ if ($('.tel').length > 0 ) {
 	$('.tel').text( tel2 + '-' + tel3 + ' ' + tel4 + ' ' + tel5);
 
 }
-
-// prevent captca
+// studioginger11@gmail.com
+// form
 var $contactForm = $('.contactform');
 $contactForm.submit(function(e) {
 	e.preventDefault();
 	$.ajax({
-		url: '//formspree.io/studioginger11@gmail.com',
+		url: '//formspree.io/groendaniel@gmail.com',
 		method: 'POST',
 		data: $(this).serialize(),
 		dataType: 'json',
 		beforeSend: function() {
-			$('.spinner').addClass('visible');
+			$('.load-wrapper').addClass('visible');
 			$('.overtake').addClass('visible');
 		},
 		success: function(data) {
-			$('.spinner').removeClass('visible');
+			$('.load-wrapper').removeClass('visible');
 			$('.thankyou').addClass('visible');
 			$('.thankyou .send, .overtake').on('click touch', function() {
 				location.reload();
