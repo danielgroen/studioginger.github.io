@@ -13,10 +13,14 @@ if ($('.tel').length > 0 ) {
 
 // form
 var $contactForm = $('.contactform');
+var e = "studioginger11",
+	mail = "gmail.com";
+$('.to').val(e + '@' + mail);
+
 $contactForm.submit(function(e) {
 	e.preventDefault();
 	$.ajax({
-		url: '//formspree.io/studioginger11@gmail.com',
+		url: 'https://script.google.com/macros/s/AKfycbxqE_YvIkezI6uUbiLA1TPIdrKbNqHylojTWqt8Du6hfwqvBWFP/exec',
 		method: 'POST',
 		data: $(this).serialize(),
 		dataType: 'json',
