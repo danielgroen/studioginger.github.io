@@ -20,7 +20,7 @@ $('.to').val(e + '@' + mail);
 $contactForm.submit(function(e) {
 	e.preventDefault();
 	$.ajax({
-		url: 'https://script.google.com/macros/s/AKfycbxqE_YvIkezI6uUbiLA1TPIdrKbNqHylojTWqt8Du6hfwqvBWFP/exec',
+		url: 'https://script.google.com/macros/s/AKfycbyR85wci2UtjMI2C1C8tBKKEMUxB_jESOwBQtdyz8ANv-Se-us/exec',
 		method: 'POST',
 		data: $(this).serialize(),
 		dataType: 'json',
