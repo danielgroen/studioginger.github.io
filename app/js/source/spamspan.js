@@ -15,7 +15,9 @@ export default function() {
 
   // form
   var $contactForm = $('.contactform');
-  var e = "studioginger11",
+  // var e = "studioginger11",
+  //   mail = "gmail.com";
+  var e = "groendaniel",
     mail = "gmail.com";
   $('.to').val(e + '@' + mail);
 
