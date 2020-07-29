@@ -1,4 +1,5 @@
 .overview-block {
+  position: relative;
 	.category {
 		width: 100%;
 		margin-bottom: 15px;
@@ -8,7 +9,8 @@
 		background-attachment: 50% 50%;
 		background-repeat: no-repeat;
 		background-position: center;
-		display: block;
+    display: block;
+    overflow: hidden;
 
 		&:hover {
 			.text {

@@ -2,21 +2,29 @@
   "name": "studioginger.nl",
   "version": "0.0.1",
   "description": "site studioginger.nl",
+  "homepage": "https://studioginger.nl",
   "main": "gulpfile.js",
   "scripts": {
-    "install": "./scripts/build.sh",
-    "postinstall": "bower install"
+    "start": "npx gulp serve",
+    "build": "npx gulp build",
+    "postinstall": "sudo apt install nasm && npm run build",
+    "deploy": "npm run build && node -e 'require(\"gh-pages\").publish(\"dist\", err => {} );'"
   },
   "author": "Daniel",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/danielgroen/studioginger.nl",
+  "engines": {
+    "node": ">=8.0.0 <9.0.0"
+  },
+  "copy": [
+    "jquery",
+    "owl.carousel/dist"
+  ],
   "devDependencies": {
     "async": "^2.5.0",
     "breakpoint-sass": "^2.7.1",
     "browser-sync": "^2.18.8",
     "event-stream": "^3.3.4",
-    "gh-pages": "^1.1.0",
-    "github-pages": "^3.0.2",
+    "gh-pages": "^3.1.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-concat": "^2.6.1",
@@ -37,13 +45,12 @@
     "gulp-style-inject": "^0.1.0",
     "gulp-uglify": "^2.0.1",
     "imagemin-mozjpeg": "^6.0.0",
+    "jquery": "^3.5.1",
     "main-bower-files": "^2.13.1",
+    "owl.carousel": "^2.3.4",
     "sass-strip-unit": "^1.0.0",
-    "singularitygs": "^1.7.1",
+    "singularitygs": "^1.8.0",
     "stream-series": "^0.1.1",
     "webfontloader": "^1.6.28"
-  },
-  "dependencies": {
-    "gulp-gh-pages": "git+ssh://git@github.com/tekd/gulp-gh-pages.git#update-dependency"
   }
 }

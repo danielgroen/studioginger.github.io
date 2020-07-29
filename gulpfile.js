@@ -1,8 +1,7 @@
 'use strict';
-const 			gulp 				= require('gulp'),
+const 	gulp 				= require('gulp'),
 				browserSync 		= require('browser-sync').create(),
-				mainBowerFiles		= require('main-bower-files'),
-				filesystem			= require('fs'),
+        fs = require('fs-extra'),
 				async 				= require('async'),
 				mozjpeg 			= require('imagemin-mozjpeg'),
 				gulpAutoprefixer 	= require('gulp-autoprefixer'),
@@ -20,48 +19,54 @@ const 			gulp 				= require('gulp'),
 				imageResize 		= require('gulp-image-resize'),
 				styleInject 		= require("gulp-style-inject"),
 				imagemin 			= require('gulp-imagemin'),
-				reload 				= browserSync.reload,
-				ghPages 			= require('gulp-gh-pages'),
-				
+        reload 				= browserSync.reload,
+        config = require('./package.json'),
+
 				// files
 				app 				= './app',
+				jsVendor		= './app/js/vendor',
 				dist 				= 'dist',
-				jsFiles 			= '/js/source/*.js',
+				jsFiles 			= [app + '/js/*.js' , app + '/js/**/*.js'],
 				data	 			= '/data/*.json',
 				images 				= '/img/**/*.{png,jpg,jpeg,ico}',
 				sassFiles 			= '/sass/**/*.scss',
 				fonts				= '/font/*.scss',
 				htmlFiles 			= '/*.html',
 				cssFiles 			= '/css/*.css',
-				cname				= '/CNAME',
-
-				options = {
-					force: true,
-					branch: 'gh-pages'
-				},
-				
-				host = {
-					sitename: "https://studioginger.nl",
-					username: "sven"
-				};
+				cname				= '/CNAME';
 
 // Setup browsersync.
 gulp.task('browsersync', function() {
     browserSync.init({
         server: {
-            baseDir: app
+            baseDir: app,
+            serveStaticOptions: {
+              extensions: ["html"]
+          }
         },
         ghostMode: false
     });
 });
 
+gulp.task('copy', async resolve => {
+  await fs.emptyDir(`${jsVendor}`);
+  console.log(`REMOVED: ${jsVendor}`);
+
+  config.copy.forEach(element => {
+    fs.copy(`${process.cwd()}/node_modules/${element}`, `${jsVendor}/${element}`, (err) => {
+      if (err) { console.error(err); }
+      else { console.log(`CREATED: ${jsVendor}/${element}`); }
+    });
+  });
+});
+
 // set scss files to the css folder into a css file
 gulp.task('css',function() {
 	gulp.src(app + sassFiles)
-    	.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(sassGlob())
-	    .pipe(sass())
-	    .pipe(cssImageDimensions('../img/'))
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sassGlob())
+    .pipe(sass())
+    .pipe(cssImageDimensions('../img/'))
 		.pipe(gulpAutoprefixer({
 	        browsers: ['last 40 versions'],
         	cascade: false
@@ -71,30 +76,22 @@ gulp.task('css',function() {
 
     gulp.src(app + fonts)
     	.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-        .pipe(sassGlob())
+      .pipe(sassGlob())
 	    .pipe(sass())
-		.pipe(gulpAutoprefixer({
-	        browsers: ['last 40 versions'],
-        	cascade: false
-		}))
-        .pipe(concat('fonts.css'))
-        .pipe(gulp.dest(app + '/css/'))
-		.pipe(browserSync.stream());
-});
-
-gulp.task('js', function() {
-	return gulp.src(mainBowerFiles(['**/*.js']).concat(app + jsFiles))
-		.pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-		.pipe(concat('build.js'))
-		.pipe(gulp.dest(app + '/js/'))
-		.pipe(browserSync.stream());
+      .pipe(gulpAutoprefixer({
+            browsers: ['last 40 versions'],
+            cascade: false
+      }))
+      .pipe(concat('fonts.css'))
+      .pipe(gulp.dest(app + '/css/'))
+		  .pipe(browserSync.stream());
 });
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-gulp.task('serve', ['browsersync', 'css'], function() {
+gulp.task('serve', ['browsersync', 'css', 'copy'], function() {
 	gulp.watch([app + htmlFiles]).on("change", reload);
-	gulp.watch([app + jsFiles], ['js']);
+	gulp.watch([jsFiles]).on("change", reload);
 	gulp.watch([app + fonts], ['css']);
 	gulp.watch([app + data]).on("change", reload);
 	gulp.watch([app + sassFiles], ['css']);
@@ -116,7 +113,7 @@ gulp.task('jpg', function () {
 
 gulp.task('default', ['serve']);
 
-gulp.task('build', ['js', 'css'], function() {
+gulp.task('build', ['css', 'copy'], function() {
 
 	async.series([
 	    function (next) {
@@ -145,15 +142,14 @@ gulp.task('build', ['js', 'css'], function() {
 				.pipe(concat('CNAME'))
 				.pipe(gulp.dest(dist));
 		}
-	]);
+  ]);
+    const cnameUrl = config.homepage,
+          cnameClean = cnameUrl.split('//')[1];
 
+    fs.writeFile('dist/CNAME', cnameClean)
     gulp.src(app + htmlFiles , {read: false})
-        .pipe(xmlsitemap( {siteUrl: host.sitename} ))
+        .pipe(xmlsitemap( {siteUrl: cnameUrl} ))
         .pipe(gulp.dest(dist));
-
-	gulp.src(app + '/js/*.js')
-		.pipe(uglify())
-		.pipe(gulp.dest( dist + '/js/'));
 
 	gulp.src(app + data)
 		.pipe(gulp.dest( dist + '/data/'));
@@ -162,9 +158,4 @@ gulp.task('build', ['js', 'css'], function() {
 		// .pipe(imagemin([mozjpeg()]))
 		.pipe(gulp.dest(dist + '/img/'));
 
-});
-
-gulp.task('deploy', function() {
-  return gulp.src('./dist/**/*')
-    .pipe(ghPages(options));
 });
