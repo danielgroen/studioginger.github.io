@@ -7,7 +7,7 @@
   "scripts": {
     "start": "npx gulp serve",
     "build": "npx gulp build",
-    "postinstall": "sudo apt install nasm && npm run build",
+    "postinstall": "sudo apt install nasm && npm run build && npx gulp copy",
     "deploy": "npm run build && node -e 'require(\"gh-pages\").publish(\"dist\", err => {} );'"
   },
   "author": "Daniel",

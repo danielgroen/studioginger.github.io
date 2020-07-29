@@ -113,7 +113,7 @@ gulp.task('jpg', function () {
 
 gulp.task('default', ['serve']);
 
-gulp.task('build', ['css', 'copy'], function() {
+gulp.task('build', [ 'css'], function() {
 
 	async.series([
 	    function (next) {
@@ -152,7 +152,10 @@ gulp.task('build', ['css', 'copy'], function() {
         .pipe(gulp.dest(dist));
 
 	gulp.src(app + data)
-		.pipe(gulp.dest( dist + '/data/'));
+    .pipe(gulp.dest( dist + '/data/'));
+
+  gulp.src(app + '/js/**')
+   .pipe(gulp.dest( dist + '/js'));
 
 	gulp.src(app + images)
 		// .pipe(imagemin([mozjpeg()]))
