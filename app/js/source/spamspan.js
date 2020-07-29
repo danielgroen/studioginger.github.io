@@ -15,18 +15,29 @@ export default function() {
 
   // form
   var $contactForm = $('.contactform');
-  // var e = "studioginger11",
-  //   mail = "gmail.com";
-  var e = "groendaniel",
-    mail = "gmail.com";
-  $('.to').val(e + '@' + mail);
 
   $contactForm.submit(function(e) {
+
+    var name = $("#name").val(),
+      subject = $("#subject").val(),
+      email = $("#mail").val(),
+      message = $("#message").val();
+
+    if ( $('#email').val() ) return false; // honeypot
+
+    var sendInfo = {
+      Name: name,
+      Subject: subject,
+      Email: email,
+      Message: message
+    };
+
     e.preventDefault();
     $.ajax({
-      url: 'https://script.google.com/macros/s/AKfycbyR85wci2UtjMI2C1C8tBKKEMUxB_jESOwBQtdyz8ANv-Se-us/exec',
+      // url: 'http://mailhandler.test',
+      url: 'https://mailhandler.danielgroen.nl',
       method: 'POST',
-      data: $(this).serialize(),
+      data: {studioginger: JSON.stringify(sendInfo)},
       dataType: 'json',
       beforeSend: function() {
         $('.load-wrapper').addClass('visible');
@@ -40,8 +51,9 @@ export default function() {
         })
       },
       error: function(err) {
-        $contactForm.find('.alert--loading').hide();
-        $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
+        console.log(sendInfo)
+        // $contactForm.find('.alert--loading').hide();
+        // $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
       }
     });
   });

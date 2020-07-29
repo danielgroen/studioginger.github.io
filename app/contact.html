@@ -70,19 +70,18 @@
 					</p>
 					<form id="gform" class="contactform" method="POST">
 						<label for="name">Naam</label>
-					    <input class="form-field" type="text" name="name" placeholder="Bv. Katja de Bruin" required>
+					    <input class="form-field" type="text" id="name" name="name" placeholder="Bv. Katja de Bruin" required>
 					    
 						<label for="email">E-mail</label>
-					    <input class="form-field" type="email" name="email" placeholder="Bv. katjadebruin@gmail.com" required>
+					    <input class="form-field" type="email" id="mail" name="email" placeholder="Bv. katjadebruin@gmail.com" required>
 
 						<label for="subject">Onderwerp</label>
-					    <input class="form-field" type="text" name="subject" placeholder="Bv. Trouwfoto's in Utrecht" required>
+					    <input class="form-field" type="text" id="subject" name="subject" placeholder="Bv. Trouwfoto's in Utrecht" required>
 
 						<label for="message">Bericht</label>
-					    <textarea class="form-field" name="message" rows="5" placeholder="Bv. Hoi Lotte, ik wil graag mijn bruiloft laten vastleggen. Het zal plaatsvinden op 20 juni. Ben je dan beschikbaar? Groetjes, Katja" required></textarea>
+					    <textarea class="form-field" id="message" name="message" rows="5" placeholder="Bv. Hoi Lotte, ik wil graag mijn bruiloft laten vastleggen. Het zal plaatsvinden op 20 juni. Ben je dan beschikbaar? Groetjes, Katja" required></textarea>
 					    
-    				    <input type="hidden" id="honeypot" type="text" name="honeypot" value="" />
-				    	<input type="hidden"class="to" type="text" name="to" value="" />
+              <input type="hidden" id="email" type="text" name="honeypot" value="" />
 					    <input class="send" type="submit" value="Verstuur bericht" >
 					</form>	
 				</div>
