@@ -17,6 +17,8 @@ export default function() {
   var $contactForm = $('.contactform');
 
   $contactForm.submit(function(e) {
+    $('.load-wrapper').addClass('visible');
+    $('.overtake').addClass('visible');
 
     var name = $("#name").val(),
       subject = $("#subject").val(),
@@ -24,6 +26,7 @@ export default function() {
       message = $("#message").val();
 
     if ( $('#email').val() ) return false; // honeypot
+    let url = window.location.href;
 
     var sendInfo = {
       Name: name,
@@ -31,27 +34,31 @@ export default function() {
       Email: email,
       Message: message
     };
-
+    let mailHandler;
+    if (!url.includes('localhost')) {
+      mailHandler = 'https://mailhandaler.danielgroen.nl';
+    }
+    else {
+      mailHandler = 'http://mailhandler.test';
+    }
     e.preventDefault();
     $.ajax({
-      // url: 'http://mailhandler.test',
-      url: 'https://mailhandler.danielgroen.nl',
+      url: mailHandler,
       method: 'POST',
       data: {studioginger: JSON.stringify(sendInfo)},
       dataType: 'json',
       beforeSend: function() {
-        $('.load-wrapper').addClass('visible');
-        $('.overtake').addClass('visible');
-      },
-      success: function(data) {
         $('.load-wrapper').removeClass('visible');
         $('.thankyou').addClass('visible');
         $('.thankyou .send, .overtake').on('click touch', function() {
           location.reload();
         })
       },
+      success: function(data) {
+
+      },
       error: function(err) {
-        console.log(sendInfo)
+        // console.log(sendInfo)
         // $contactForm.find('.alert--loading').hide();
         // $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
       }
