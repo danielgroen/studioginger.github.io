@@ -36,7 +36,7 @@ export default function() {
     };
     let mailHandler;
     if (!url.includes('localhost')) {
-      mailHandler = 'https://mailhandaler.danielgroen.nl';
+      mailHandler = 'https://mailhandler.danielgroen.nl';
     }
     else {
       mailHandler = 'http://mailhandler.test';
