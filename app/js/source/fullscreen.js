@@ -3,7 +3,7 @@ import * as imgfunctions from './subcomponents/imgfunctions.js';
 export default async function() {
   await fetch('data/data.json');
   
-  $('.image-block .image-holder').on('click touch', function() {
+  await $('.image-block .image-holder').on('click touch', function() {
     imgfunctions.removeAllFullscreen();
     $(this).closest('.figure').addClass('fullscreen');
     $('body').addClass('fullscreen');
@@ -24,8 +24,8 @@ export default async function() {
       $('.image-mobile-navigations .arrow-right').removeClass('transparent');
     }
   })
-
-  $('.thumbnail, body .fullscreen').on('click', function() {
+  
+  $(' .fullscreen').on('click', function() {
     imgfunctions.removeAllFullscreen();
   });
 

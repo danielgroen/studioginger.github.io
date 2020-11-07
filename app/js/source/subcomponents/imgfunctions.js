@@ -1,4 +1,5 @@
 export const removeAllFullscreen = function() {
+  
     $('.fullscreen').removeClass('fullscreen');
     $('.transparent').removeClass('transparent');
     $('.image-mobile-navigations').removeClass('visible');

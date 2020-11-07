@@ -19,7 +19,7 @@ figure.fullscreen {
 	left: 0;
 	top: 0;
 	z-index: 10;
-	pointer-events: none;
+	pointer-events: none; 
 
 	.figure-wrapper {
 		transition: opacity $speed;
@@ -33,6 +33,7 @@ figure.fullscreen {
 		pointer-events: none;
 
 		.image-holder {
+      pointer-events: none !important;
 			order: 2;
 			align-self: center;
 			animation: fullscreen-fadein $speed;
@@ -63,7 +64,6 @@ figure.fullscreen {
 					max-width: 15px;
 					float: right;
 					vertical-align: center;
-					pointer-events: all;
 				}
 			}
 
