@@ -1649,6 +1649,7 @@ figure.fullscreen {
     cursor: auto;
     pointer-events: none; }
     figure.fullscreen .figure-wrapper .image-holder {
+      pointer-events: none !important;
       -webkit-box-ordinal-group: 3;
       -webkit-order: 2;
       -moz-box-ordinal-group: 3;
@@ -1683,8 +1684,7 @@ figure.fullscreen {
           display: none;
           max-width: 15px;
           float: right;
-          vertical-align: center;
-          pointer-events: all; }
+          vertical-align: center; }
       figure.fullscreen .figure-wrapper .image-holder img {
         -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
         box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15); }
