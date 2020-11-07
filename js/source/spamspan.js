@@ -58,7 +58,6 @@ export default function() {
 
       },
       error: function(err) {
-        // console.log(sendInfo)
         // $contactForm.find('.alert--loading').hide();
         // $contactForm.append('<div class="alert alert--error">Ops, there was an error.</div>');
       }

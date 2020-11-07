@@ -6,7 +6,7 @@ export default async function(data) {
 
   // var oldDescriptionTagPastebackOnLine18AfterTheFigcaptionTag = '<span class="title">' + val.title + '</span><span class="subscription"> - ' + val.description + '</span>\';
   
-  $.each(data, function( index, val ) {
+  await $.each(data, function( index, val ) {
     if (index == activePage) {
       $.each( data[index], function( index, val ) {
         cards.push( '<figure class="figure">\
@@ -39,4 +39,6 @@ export default async function(data) {
 
   $('.image-block').addClass(activePage);
   $('.main-menu .active').parent().addClass('active-trail');
+  
+  return;
 }

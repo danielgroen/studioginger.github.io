@@ -2,7 +2,7 @@
   "_args": [
     [
       "jquery@3.5.1",
-      "/var/www/html/html/studioginger.nl"
+      "/var/www/studioginger.nl"
     ]
   ],
   "_development": true,
@@ -28,7 +28,7 @@
   ],
   "_resolved": "https://registry.npmjs.org/jquery/-/jquery-3.5.1.tgz",
   "_spec": "3.5.1",
-  "_where": "/var/www/html/html/studioginger.nl",
+  "_where": "/var/www/studioginger.nl",
   "author": {
     "name": "JS Foundation and other contributors",
     "url": "https://github.com/jquery/jquery/blob/3.5.1/AUTHORS.txt"
