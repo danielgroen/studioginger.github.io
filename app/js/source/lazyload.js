@@ -19,7 +19,6 @@ function waitForElm(selector) {
 }
 export default async function() {
   await waitForElm('img[data-src]');
-  console.log($('img[data-src]').length)
   await $('img[data-src]').each(function(index) {
           var that = $(this);
           var src = that.attr('data-src');

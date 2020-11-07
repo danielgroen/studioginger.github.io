@@ -15,12 +15,12 @@
 		<meta name="msapplication-config" content="img/favicons/browserconfig.xml">
 		<meta name="theme-color" content="#ffffff">
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml" />
-		<link rel="apple-touch-icon" sizes="180x180" href="img/favicons/apple-touch-icon.png">
-		<link rel="icon" type="image/png" sizes="32x32" href="img/favicons/favicon-32x32.png">
-		<link rel="icon" type="image/png" sizes="16x16" href="img/favicons/favicon-16x16.png">
-		<link rel="manifest" href="img/favicons/manifest.json">
-		<link rel="mask-icon" href="img/favicons/safari-pinned-tab.svg" color="#5bbad5">
-		<link rel="shortcut icon" href="img/favicons/favicon.ico">
+		<link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png">
+		<link rel="manifest" href="/img/favicons/manifest.json">
+		<link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+		<link rel="shortcut icon" href="/img/favicons/favicon.ico">
 		<meta property="og:title" content="Studio Ginger">
 		<meta property="og:description" content="Fotografie voor: moeders | trouwen | portretten | publicaties">
 		<meta property="og:image" content="https://studioginger.nl/img/og-image.png">
@@ -29,7 +29,9 @@
 		<meta property="og:url" content="https://studioginger.nl/">
 		<meta property="og:type" content="website">
 		<!-- Global Site Tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-106728519-2"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-106728519-2"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" defer crossorigin="anonymous"></script>
+    <script type="module" src="/js/javascript.js" async></script>
 		<script>
 		  window.dataLayer = window.dataLayer || [];
 		  function gtag(){dataLayer.push(arguments)};
@@ -38,8 +40,7 @@
 		  gtag('config', 'UA-106728519-2');
 		</script>
 		<script type="text/javascript">!function(){"use strict";function e(e,t,n){e.addEventListener?e.addEventListener(t,n,!1):e.attachEvent&&e.attachEvent("on"+t,n)}function t(e){return window.localStorage&&localStorage.font_css_cache&&localStorage.font_css_cache_file===e}function n(){if(window.localStorage&&window.XMLHttpRequest)if(t(o))c(localStorage.font_css_cache);else{var n=new XMLHttpRequest;n.open("GET",o,!0),e(n,"load",function(){4===n.readyState&&(c(n.responseText),localStorage.font_css_cache=n.responseText,localStorage.font_css_cache_file=o)}),n.send()}else{var a=document.createElement("link");a.href=o,a.rel="stylesheet",a.type="text/css",document.getElementsByTagName("head")[0].appendChild(a),document.cookie="font_css_cache"}}function c(e){var t=document.createElement("style");t.innerHTML=e,document.getElementsByTagName("head")[0].appendChild(t)}var o="css/fonts.css";window.localStorage&&localStorage.font_css_cache||document.cookie.indexOf("font_css_cache")>-1?n():e(window,"load",n)}();</script><noscript><link rel="stylesheet" href="css/fonts.css"></noscript>
-		<style><!-- inject-style src="./dist/css/stylesheet.css" --></style>
-		<link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+<link rel="stylesheet" href="/css/stylesheet.css" media="all" onload="this.media='all'">
 	</head>
 	<body>
 		<header>
@@ -129,9 +130,5 @@
 				</div>
 			</section>
 		</main>
-    <script
-			  src="https://code.jquery.com/jquery-3.5.1.min.js"
-			  crossorigin="anonymous"></script>
-		<script type="module" src="js/build.js" defer></script>
 	</body>
 </html>

@@ -2,23 +2,17 @@
 const 	gulp 				= require('gulp'),
 				browserSync 		= require('browser-sync').create(),
         fs = require('fs-extra'),
-				async 				= require('async'),
-				mozjpeg 			= require('imagemin-mozjpeg'),
 				gulpAutoprefixer 	= require('gulp-autoprefixer'),
 				concat 				= require('gulp-concat'),
 				notify 				= require('gulp-notify'),
 				plumber 			= require('gulp-plumber'),
 				sass 				= require('gulp-sass'),
 				sassGlob 			= require('gulp-sass-glob'),
-				uglify 				= require('gulp-uglify'),
 				cssImageDimensions 	= require("gulp-css-image-dimensions"),
 				replace 			= require('gulp-replace'),
-				cssnano 			= require('gulp-cssnano'),
 				htmlmin				= require('gulp-htmlmin'),
 				xmlsitemap 			= require('gulp-sitemap'),
 				imageResize 		= require('gulp-image-resize'),
-				styleInject 		= require("gulp-style-inject"),
-				imagemin 			= require('gulp-imagemin'),
         reload 				= browserSync.reload,
         config = require('./package.json'),
 
@@ -31,9 +25,7 @@ const 	gulp 				= require('gulp'),
 				images 				= '/img/**/*.{png,jpg,jpeg,ico}',
 				sassFiles 			= '/sass/**/*.scss',
 				fonts				= '/font/*.scss',
-				htmlFiles 			= '/*.html',
-				cssFiles 			= '/css/*.css',
-				cname				= '/CNAME';
+				htmlFiles 			= '/*.html';
 
 // Setup browsersync.
 gulp.task('browsersync', function() {
@@ -61,7 +53,7 @@ gulp.task('copy', async resolve => {
 });
 
 // set scss files to the css folder into a css file
-gulp.task('css',function() {
+gulp.task('css',function(done) {
 	gulp.src(app + sassFiles)
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sassGlob())
@@ -84,12 +76,14 @@ gulp.task('css',function() {
       }))
       .pipe(concat('fonts.css'))
       .pipe(gulp.dest(app + '/css/'))
-		  .pipe(browserSync.stream());
+      .pipe(browserSync.stream());
+      
+    return done();
 });
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-gulp.task('serve', ['browsersync', 'css', 'copy'], function() {
+gulp.task('serve', gulp.series('browsersync', 'css', 'copy'), function() {
 	gulp.watch([app + htmlFiles]).on("change", reload);
 	gulp.watch([jsFiles]).on("change", reload);
 	gulp.watch([app + fonts], ['css']);
@@ -97,7 +91,7 @@ gulp.task('serve', ['browsersync', 'css', 'copy'], function() {
 	gulp.watch([app + sassFiles], ['css']);
 });
  
-gulp.task('jpg', function () {
+gulp.task('jpg', gulp.series('browsersync'),function (done) {
 	// compress images
 	gulp.src(app + '/img/full/**/*.{png,jpg,jpeg,ico}')
 	    .pipe(imageResize({ format : 'jpg' }))
@@ -108,57 +102,29 @@ gulp.task('jpg', function () {
 	    .pipe(imageResize({
 	      percentage: 50
 	    }))
-	    .pipe(gulp.dest(app + '/img/thumbnail/'));
+      .pipe(gulp.dest(app + '/img/thumbnail/'));
+      
+      return done();
 });
 
-gulp.task('default', ['serve']);
+gulp.task('default', gulp.series('serve'));
 
-gulp.task('build', [ 'css'], function() {
+gulp.task('build',  async function (done) {
 
-	async.series([
-	    function (next) {
-			gulp.src(app + cssFiles)	
-				.pipe(cssnano())
-				.pipe(gulp.dest( dist + '/css/'))
-				.on('end', next);
-		},
-	    function (next) {
-			gulp.src(app + '/css/fonts.css')	
-				.pipe(gulp.dest( dist + '/css/'))
-				.on('end', next);
-		},		
-	    function (next) {
-			gulp.src(app + htmlFiles)
-				.pipe(styleInject({encapsulated: false}))
-			    .pipe(replace('<link rel="stylesheet" type="text/css" href="css/stylesheet.css">', ' '))
-			    .pipe(replace('<style><!-- inject-style src="./dist/css/stylesheet.css" --></style>', ' '))
-			    .pipe(replace('../img/', 'img/'))
-				.pipe(htmlmin({collapseWhitespace: true}))
-				.pipe(gulp.dest(dist))
-				.on('end', next);
-	    },
-	    function (next) {
-			gulp.src(app + cname)
-				.pipe(concat('CNAME'))
-				.pipe(gulp.dest(dist));
-		}
-  ]);
-    const cnameUrl = config.homepage,
-          cnameClean = cnameUrl.split('//')[1];
+      await fs.copy(app, dist);
 
-    fs.writeFile('dist/CNAME', cnameClean)
+      await gulp.src(dist + htmlFiles)
+                .pipe(replace('../img/', 'img/'))
+                .pipe(htmlmin({collapseWhitespace: true}))
+
+    await fs.rmdirSync(`${dist}/sass`, { recursive: true }  );
+
+
+    const cnameUrl = config.homepage;
+
     gulp.src(app + htmlFiles , {read: false})
         .pipe(xmlsitemap( {siteUrl: cnameUrl} ))
         .pipe(gulp.dest(dist));
 
-	gulp.src(app + data)
-    .pipe(gulp.dest( dist + '/data/'));
-
-  gulp.src(app + '/js/**')
-   .pipe(gulp.dest( dist + '/js'));
-
-	gulp.src(app + images)
-		// .pipe(imagemin([mozjpeg()]))
-		.pipe(gulp.dest(dist + '/img/'));
-
+      return done();
 });

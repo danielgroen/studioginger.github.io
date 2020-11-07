@@ -2,8 +2,8 @@ import * as imgfunctions from './subcomponents/imgfunctions.js';
 
 export default async function() {
   await fetch('data/data.json');
-
-  $('.image-block img').on('click touch', function() {
+  
+  $('.image-block .image-holder').on('click touch', function() {
     imgfunctions.removeAllFullscreen();
     $(this).closest('.figure').addClass('fullscreen');
     $('body').addClass('fullscreen');
@@ -25,7 +25,7 @@ export default async function() {
     }
   })
 
-  $('.close, .fullscreen').on('click touch', function() {
+  $('.thumbnail, body .fullscreen').on('click', function() {
     imgfunctions.removeAllFullscreen();
   });
 
