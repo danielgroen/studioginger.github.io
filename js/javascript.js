@@ -16,7 +16,7 @@ window.addEventListener("load", async () => {
   gridVisualizer();
   jsonloader();
   form();
-  owlcarousel();
+  await owlcarousel();
   await lazyload();
   prices();
   fullscreen();

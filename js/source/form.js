@@ -39,6 +39,7 @@ export default function () {
     } else {
       mailHandler = "http://mailhandler.test";
     }
+
     e.preventDefault();
     $.ajax({
       url: mailHandler,
@@ -55,13 +56,13 @@ export default function () {
       success: function (data) {
         console.log("success");
       },
-      error: function (err) {
-        console.log(err);
+      error: function (xhr, status, error) {
+        var errorMessage = xhr.status + ": " + xhr.statusText;
+        console.log(errorMessage);
 
-        // $contactForm.find('.alert--loading').hide();
-        $contactForm.append(
-          '<div class="alert alert--error">Ops, there was an error.</div>'
-        );
+        // $contactForm.append(
+        //   '<div class="alert alert--error">Oops, an error occurred.</div>'
+        // );
       },
     });
   });
