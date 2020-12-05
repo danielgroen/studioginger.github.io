@@ -4,7 +4,6 @@ bower_components
 environment
 .publish
 dist
-app/css/
-app/js/*.js
-app/js/vendor
+src/css/
+src/js/vendor
 *.log
