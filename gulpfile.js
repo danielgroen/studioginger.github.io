@@ -17,7 +17,7 @@ const gulp = require("gulp"),
   config = require("./package.json"),
   // files
   app = "./src",
-  jsVendor = "./app/js/vendor",
+  jsVendor = app + "/js/vendor",
   dist = "dist",
   jsFiles = [app + "/js/*.js", app + "/js/**/*.js"],
   data = "/data/*.json",
